@@ -17,6 +17,7 @@ The goal of this project is to create a restaurant page with focus on usage of J
 ### Tools
 
 - Visual Studio Code
+- Adobe Photoshop CS6
 
 ## Author
 
@@ -24,6 +25,7 @@ Wilson Lee
 - [Github](https://github.com/estercade/)
 
 ## Credits
+- [Ovo by Nicole Fally](https://fonts.google.com/specimen/Ovo) on Google Fonts for logo font
 
 ## Acknowledgments
 

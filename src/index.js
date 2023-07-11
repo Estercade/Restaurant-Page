@@ -2,7 +2,7 @@ function renderHeader() {
     const header = document.createElement('header');
 
     const logo = document.createElement('img');
-    logo.src = "./logo.png";
+    logo.src = "./omakaselogo.png";
     logo.alt = "O - Ma - Kase logo";
     header.appendChild(logo);
 
