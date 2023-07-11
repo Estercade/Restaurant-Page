@@ -1,6 +1,6 @@
-const landing = (function() {
-    const content = document.getElementById('content');
+const content = document.getElementById('content');
 
+const header = (function() {
     renderHeader = function() {
         const header = document.createElement('header');
     
@@ -8,10 +8,31 @@ const landing = (function() {
         logo.src = "./omakaselogo.png";
         logo.alt = "O - Ma - Kase logo";
         header.appendChild(logo);
+
+        const homeBtn = document.createElement('button');
+        homeBtn.type = "button";
+        homeBtn.name = "homeBtn";
+        homeBtn.innerText = "Home";
+        header.appendChild(homeBtn);
+
+        const menuBtn = document.createElement('button');
+        menuBtn.type = "button";
+        menuBtn.name = "menuBtn";
+        menuBtn.innerText = "Menu";
+        header.appendChild(menuBtn);
+
+        const contactBtn = document.createElement('button');
+        contactBtn.type = "button";
+        contactBtn.name = "contactBtn";
+        contactBtn.innerText = "Contact Us";
+        header.appendChild(contactBtn);
     
         return header;
     };
+    return { renderHeader };
+})();
 
+const landing = (function() {
     renderMainContent = function() {
         const body = document.createElement('div');
         const about = document.createElement('div');
@@ -33,8 +54,8 @@ const landing = (function() {
         return body;
     };
 
-    return { renderHeader, renderMainContent };
+    return { renderMainContent };
 })();
 
-content.appendChild(landing.renderHeader());
+content.appendChild(header.renderHeader());
 content.appendChild(landing.renderMainContent());
