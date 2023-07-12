@@ -1,42 +1,38 @@
+// import './style.css';
+import OmakaseLogo from './omakaselogo.png';
+import InstagramLogo from './instagram.svg';
+import FacebookLogo from './facebook.svg';
+
 const content = document.getElementById('content');
 
 const header = (function() {
-    const generateHeader = function() {
-        const header = document.createElement('header');
-
-        const logo = document.createElement('img');
-        logo.src = "./omakaselogo.png";
-        logo.alt = "O - Ma - Kase logo";
-        header.appendChild(logo);
-
+    const _generateNav = function() {
         const nav = document.createElement('div');
 
         const aboutBtn = document.createElement('button');
-        aboutBtn.type = "button";
-        aboutBtn.name = "about-btn";
-        aboutBtn.id = "about-btn";
-        aboutBtn.innerText = "About";
+        aboutBtn.type = 'button';
+        aboutBtn.name = 'about-btn';
+        aboutBtn.id = 'about-btn';
+        aboutBtn.innerText = 'About';
         nav.appendChild(aboutBtn);
 
         const menuBtn = document.createElement('button');
-        menuBtn.type = "button";
-        menuBtn.name = "menu-btn";
-        menuBtn.id = "menu-btn";
-        menuBtn.innerText = "Menu";
+        menuBtn.type = 'button';
+        menuBtn.name = 'menu-btn';
+        menuBtn.id = 'menu-btn';
+        menuBtn.innerText = 'Menu';
         nav.appendChild(menuBtn);
 
         const contactBtn = document.createElement('button');
-        contactBtn.type = "button";
-        contactBtn.name = "contact-btn";
-        contactBtn.id = "contact-btn";
-        contactBtn.innerText = "Contact Us";
+        contactBtn.type = 'button';
+        contactBtn.name = 'contact-btn';
+        contactBtn.id = 'contact-btn';
+        contactBtn.innerText = 'Contact Us';
         nav.appendChild(contactBtn);
-    
-        header.appendChild(nav);
 
         _attachHeaderEventListeners(aboutBtn, menuBtn, contactBtn);
 
-        return header;
+        return nav;
     };
 
     const _attachHeaderEventListeners = function(aboutBtn, menuBtn, contactBtn) {
@@ -45,13 +41,53 @@ const header = (function() {
         contactBtn.addEventListener('click', renderPageHandler.showSection);
     }
 
+    const _generateSocials = function() {
+        const socialsWrapper = document.createElement('div');
+
+        const instagramLink = document.createElement('a');
+        instagramLink.href = 'https://www.instagram.com/O.MA.KASE_NYC/';
+        instagramLink.target = '_blank';
+        instagramLink.rel = 'noopener noreferrer';
+        const instagramIcon = document.createElement('img');
+        instagramIcon.src = InstagramLogo;
+        instagramIcon.alt = 'Instagram Icon';
+        instagramLink.appendChild(instagramIcon);
+        socialsWrapper.appendChild(instagramLink);
+
+        const facebookLink = document.createElement('a');
+        facebookLink.href = 'https://www.facebook.com/O.MA.KASE_NYC/';
+        facebookLink.target = '_blank';
+        facebookLink.rel = 'noopener noreferrer';
+        const facebookIcon = document.createElement('img');
+        facebookIcon.src = FacebookLogo;
+        facebookIcon.alt = 'Facebook Icon';
+        facebookLink.appendChild(facebookIcon);
+        socialsWrapper.appendChild(facebookLink);
+
+        return socialsWrapper;
+    }
+
+    const generateHeader = function() {
+        const header = document.createElement('header');
+
+        const logo = document.createElement('img');
+        logo.src = OmakaseLogo;
+        logo.alt = 'O - Ma - Kase logo';
+        
+        header.appendChild(logo);
+        header.appendChild(_generateNav());
+        header.appendChild(_generateSocials());
+
+        return header;
+    }
+
     return { generateHeader };
 })();
 
 const landing = (function() {
-    generateAbout = function() {
+    const generateAbout = function() {
         const aboutWrapper = document.createElement('div');
-        aboutWrapper.id = "about-wrapper";
+        aboutWrapper.id = 'about-wrapper';
 
         const aboutHeader = document.createElement('h3');
         aboutHeader.innerText = 'About';
@@ -73,7 +109,7 @@ const landing = (function() {
 })();
 
 const menu = (function() {
-    generateMenu = function() {
+    const generateMenu = function() {
         const menuWrapper = document.createElement('div');
         menuWrapper.id = 'menu-wrapper';
         
@@ -91,7 +127,7 @@ const menu = (function() {
         return menuWrapper;
     }
 
-    _addMenuItem1 = function(){
+    const _addMenuItem1 = function(){
         const item1 = document.createElement('li');
         const item1Name = document.createElement('h4');
         item1Name.innerText = 'Ramen Omakase';
@@ -105,13 +141,13 @@ const menu = (function() {
         return item1;
     }
     
-    _addMenuItem2 = function(){
+    const _addMenuItem2 = function(){
         const item2 = document.createElement('li');
         const item2Name = document.createElement('h4');
         item2Name.innerText = 'Sushi Omakase';
         
         const item2Desc = document.createElement('p');
-        item2Desc.innerText = "Multi-course meal consisting of approximately twenty pieces of nigiri sushi made with fish and shellfish sourced globally followed by tamago then finished with a seasonal dessert. Beverage pairing available."
+        item2Desc.innerText = 'Multi-course meal consisting of approximately twenty pieces of nigiri sushi made with fish and shellfish sourced globally followed by tamago then finished with a seasonal dessert. Beverage pairing available.'
 
         item2.appendChild(item2Name);
         item2.appendChild(item2Desc);
@@ -128,7 +164,7 @@ const contact = (function() {
         locationCard.id = 'location-card';
 
         const locationTitleWrapper = document.createElement('li');
-        locationTitle = document.createElement('h4');
+        const locationTitle = document.createElement('h4');
         locationTitle.innerText = 'Address:';
         locationTitleWrapper.appendChild(locationTitle);
         locationCard.appendChild(locationTitleWrapper);
@@ -147,9 +183,9 @@ const contact = (function() {
         const locationAddressWrapper = document.createElement('li');
         const locationLink = document.createElement('a');
         locationLink.innerText = '15121 123rd Street\nNew York, NY 101880'
-        locationLink.href = "https://goo.gl/maps/iH7aiyujwQ9AQ69E8";
-        locationLink.target = "_blank";
-        locationLink.rel = "noopener noreferrer";
+        locationLink.href = 'https://goo.gl/maps/iH7aiyujwQ9AQ69E8';
+        locationLink.target = '_blank';
+        locationLink.rel = 'noopener noreferrer';
         locationAddressWrapper.appendChild(locationLink);
         locationCard.appendChild(locationAddressWrapper);
 
@@ -165,7 +201,7 @@ const contact = (function() {
         contactMeCard.id = 'contact-me-card';
 
         const contactMeTitleWrapper = document.createElement('li');
-        contactMeTitle = document.createElement('h4');
+        const contactMeTitle = document.createElement('h4');
         contactMeTitle.innerText = 'For business inquiries:';
         contactMeTitleWrapper.appendChild(contactMeTitle);
         contactMeCard.appendChild(contactMeTitleWrapper);
@@ -192,6 +228,8 @@ const contact = (function() {
         const gitLink = document.createElement('a');
         gitLink.innerText = 'https://github.com/Estercade';
         gitLink.href = 'https://github.com/Estercade';
+        gitLink.target = '_blank';
+        gitLink.rel = 'noopener noreferrer';
         contactMeGit.appendChild(gitLink);
         contactMeCard.appendChild(contactMeGit);
 
@@ -240,27 +278,30 @@ const renderPageHandler = (function() {
         wrapperList.push(contactWrapper);
     }
 
-    const _changeContent = function(event) {
+    const _clearContent = function(event) {
         wrapperList.forEach((wrapper) => {
-            wrapper.style.display = "none";
+            wrapper.style.display = 'none';
         })
         console.log(event);
     }
 
     const showSection = function(e) {
-        _changeContent();
+        _clearContent();
         // targetSection obtains the name of the desired section by
         // slicing the name of the target and using index of 0
         // to get rid of '-btn' in the button id
         let targetSection = document.getElementById(`${e.target.id.split('-')[0]}-wrapper`);
-        targetSection.style.display = "block";
+        targetSection.style.display = 'block';
     }
 
     const renderPage = function() {
         _renderHeader();
-        _renderAbout();
         _renderMenu();
         _renderContactUs();
+        // Clear content first then render about section last
+        // as the about section will be the default landing page
+        _clearContent();
+        _renderAbout();
     }
 
     return {

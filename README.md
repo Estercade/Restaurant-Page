@@ -26,6 +26,7 @@ Wilson Lee
 
 ## Credits
 - [Ovo by Nicole Fally](https://fonts.google.com/specimen/Ovo) on Google Fonts for logo font
+- Social media icons from [Pictogrammers](https://pictogrammers.com/);
 
 ## Acknowledgments
 
