@@ -1,7 +1,7 @@
 const content = document.getElementById('content');
 
 const header = (function() {
-    renderHeader = function() {
+    const generateHeader = function() {
         const header = document.createElement('header');
 
         const logo = document.createElement('img');
@@ -11,12 +11,12 @@ const header = (function() {
 
         const nav = document.createElement('div');
 
-        const homeBtn = document.createElement('button');
-        homeBtn.type = "button";
-        homeBtn.name = "home-btn";
-        homeBtn.id = "home-btn";
-        homeBtn.innerText = "Home";
-        nav.appendChild(homeBtn);
+        const aboutBtn = document.createElement('button');
+        aboutBtn.type = "button";
+        aboutBtn.name = "about-btn";
+        aboutBtn.id = "about-btn";
+        aboutBtn.innerText = "About";
+        nav.appendChild(aboutBtn);
 
         const menuBtn = document.createElement('button');
         menuBtn.type = "button";
@@ -34,34 +34,22 @@ const header = (function() {
     
         header.appendChild(nav);
 
-        _attachHeaderEventListeners(homeBtn, menuBtn, contactBtn);
+        _attachHeaderEventListeners(aboutBtn, menuBtn, contactBtn);
 
         return header;
     };
 
-    const _attachHeaderEventListeners = function(homeBtn, menuBtn, contactBtn) {
-        homeBtn.addEventListener('click', openHome);
-        menuBtn.addEventListener('click', openMenu);
-        contactBtn.addEventListener('click', openContact);
+    const _attachHeaderEventListeners = function(aboutBtn, menuBtn, contactBtn) {
+        aboutBtn.addEventListener('click', renderPageHandler.showSection);
+        menuBtn.addEventListener('click', renderPageHandler.showSection);
+        contactBtn.addEventListener('click', renderPageHandler.showSection);
     }
 
-    const openHome = function() {
-        console.log('home');
-    }
-
-    const openMenu = function() {
-        console.log('menu');
-    }
-
-    const openContact = function() {
-        console.log('contact us');
-    }
-
-    return { renderHeader };
+    return { generateHeader };
 })();
 
 const landing = (function() {
-    renderAbout = function() {
+    generateAbout = function() {
         const aboutWrapper = document.createElement('div');
         aboutWrapper.id = "about-wrapper";
 
@@ -81,11 +69,11 @@ const landing = (function() {
         return aboutWrapper;
     };
 
-    return { renderAbout };
+    return { generateAbout };
 })();
 
 const menu = (function() {
-    renderMenu = function() {
+    generateMenu = function() {
         const menuWrapper = document.createElement('div');
         menuWrapper.id = 'menu-wrapper';
         
@@ -131,7 +119,7 @@ const menu = (function() {
         return item2;
     }
 
-    return { renderMenu };
+    return { generateMenu };
 })();
 
 const contact = (function() {
@@ -143,7 +131,7 @@ const contact = (function() {
         locationTitle = document.createElement('h4');
         locationTitle.innerText = 'Address:';
         locationTitleWrapper.appendChild(locationTitle);
-        locationCard.appendChild(locationTitle);
+        locationCard.appendChild(locationTitleWrapper);
 
         const locationName = document.createElement('li');
         locationName.innerText = 'O - MA - KASE';
@@ -173,7 +161,6 @@ const contact = (function() {
     }
 
     const _renderContactMe = function() {        
-
         const contactMeCard = document.createElement('ul');
         contactMeCard.id = 'contact-me-card';
 
@@ -211,7 +198,7 @@ const contact = (function() {
         return contactMeCard;
     }
 
-    const renderContactUs = function() {
+    const generateContactUs = function() {
         const contactWrapper = document.createElement('div');
         contactWrapper.id = 'contact-wrapper';
         
@@ -225,10 +212,61 @@ const contact = (function() {
         return contactWrapper;
     }
 
-    return { renderContactUs };
+    return { generateContactUs };
 })();
 
-content.appendChild(header.renderHeader());
-content.appendChild(landing.renderAbout());
-content.appendChild(menu.renderMenu());
-content.appendChild(contact.renderContactUs());
+const renderPageHandler = (function() {
+    const wrapperList = [];
+
+    const _renderHeader = function() {
+        content.appendChild(header.generateHeader());
+    }
+    
+    const _renderAbout = function() {
+        content.appendChild(landing.generateAbout());
+        const aboutWrapper = document.getElementById('about-wrapper');
+        wrapperList.push(aboutWrapper);
+    }
+    
+    const _renderMenu = function() {
+        content.appendChild(menu.generateMenu());
+        const menuWrapper = document.getElementById('menu-wrapper');
+        wrapperList.push(menuWrapper);
+    }
+
+    const _renderContactUs = function() {
+        content.appendChild(contact.generateContactUs());
+        const contactWrapper = document.getElementById('contact-wrapper');
+        wrapperList.push(contactWrapper);
+    }
+
+    const _changeContent = function(event) {
+        wrapperList.forEach((wrapper) => {
+            wrapper.style.display = "none";
+        })
+        console.log(event);
+    }
+
+    const showSection = function(e) {
+        _changeContent();
+        // targetSection obtains the name of the desired section by
+        // slicing the name of the target and using index of 0
+        // to get rid of '-btn' in the button id
+        let targetSection = document.getElementById(`${e.target.id.split('-')[0]}-wrapper`);
+        targetSection.style.display = "block";
+    }
+
+    const renderPage = function() {
+        _renderHeader();
+        _renderAbout();
+        _renderMenu();
+        _renderContactUs();
+    }
+
+    return {
+        renderPage,
+        showSection,
+    }
+})();
+
+renderPageHandler.renderPage();
