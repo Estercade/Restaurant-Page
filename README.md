@@ -25,7 +25,9 @@ Wilson Lee
 - [Github](https://github.com/estercade/)
 
 ## Credits
-- [Ovo by Nicole Fally](https://fonts.google.com/specimen/Ovo) on Google Fonts for logo font
+- [Ovo font by Nicole Fally](https://fonts.google.com/specimen/Ovo) on Google Fonts for logo font
+- [Ysabeau Office font by Christian Thalmann](https://fonts.google.com/specimen/Ysabeau+Office) on Google Fonts for page font
+* Webfont generator by [Fontsquirrel](https://www.fontsquirrel.com/tools/webfont-generator);
 - Social media icons from [Pictogrammers](https://pictogrammers.com/);
 
 ## Acknowledgments

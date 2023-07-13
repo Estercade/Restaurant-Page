@@ -1,0 +1,79 @@
+/* Restaurant Page CSS stylesheet */
+
+@font-face {
+    font-family: 'Ysabeau Office';
+    src: 
+        url('./YsabeauOffice-Regular.woff2') format('woff2'),
+        url('./YsabeauOffice-Regular.woff') format('woff');
+    font-style: normal;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    border: 1px solid blue;
+}
+
+ul {
+    list-style-type: none;
+}
+
+button {
+    background: none;
+    border: none;
+    
+    font-family: 'Ysabeau Office', sans-serif;
+}
+
+button.active-section {
+    font-weight: bolder;
+}
+
+body {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 10rem 1fr;
+
+    background-color: rgba(248, 237, 211, 0.418);
+    font-family: 'Ysabeau Office', sans-serif;
+}
+
+header {
+    display: flex;
+    flex-flow: column;
+
+    flex-wrap: wrap;
+}
+
+#logo-wrapper {
+    text-align: center;
+    padding-top: 0.75rem;
+    padding-bottom: 0.25rem;
+}
+
+#omakase-logo {
+    width: 18rem;
+}
+
+#nav {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    padding: 0.25rem;
+}
+
+#socials-wrapper{  
+    display: flex;
+    justify-content: center;
+    padding: 0.25rem;
+    gap: 1rem;
+}
+
+#facebook-icon, #instagram-icon {
+    width: 1.5rem;
+}
+
+#about-wrapper, #menu-wrapper, #contact-wrapper {
+    padding: 0.5rem;
+}

@@ -1,4 +1,4 @@
-// import './style.css';
+import './style.css';
 import OmakaseLogo from './omakaselogo.png';
 import InstagramLogo from './instagram.svg';
 import FacebookLogo from './facebook.svg';
@@ -6,43 +6,59 @@ import FacebookLogo from './facebook.svg';
 const content = document.getElementById('content');
 
 const header = (function() {
+    const btnList = [];
+
     const _generateNav = function() {
         const nav = document.createElement('div');
+        nav.id = 'nav';
 
         const aboutBtn = document.createElement('button');
         aboutBtn.type = 'button';
         aboutBtn.name = 'about-btn';
         aboutBtn.id = 'about-btn';
-        aboutBtn.innerText = 'About';
+        aboutBtn.innerText = 'ABOUT';
+        // aboutBtn is the landing page so is defaulted to active
+        aboutBtn.classList = 'active-section';
         nav.appendChild(aboutBtn);
+        btnList.push(aboutBtn);
 
         const menuBtn = document.createElement('button');
         menuBtn.type = 'button';
         menuBtn.name = 'menu-btn';
         menuBtn.id = 'menu-btn';
-        menuBtn.innerText = 'Menu';
+        menuBtn.innerText = 'MENU';
         nav.appendChild(menuBtn);
+        btnList.push(menuBtn);
 
         const contactBtn = document.createElement('button');
         contactBtn.type = 'button';
         contactBtn.name = 'contact-btn';
         contactBtn.id = 'contact-btn';
-        contactBtn.innerText = 'Contact Us';
+        contactBtn.innerText = 'CONTACT US';
         nav.appendChild(contactBtn);
+        btnList.push(contactBtn);
 
-        _attachHeaderEventListeners(aboutBtn, menuBtn, contactBtn);
+        _attachHeaderEventListeners();
 
         return nav;
     };
 
-    const _attachHeaderEventListeners = function(aboutBtn, menuBtn, contactBtn) {
-        aboutBtn.addEventListener('click', renderPageHandler.showSection);
-        menuBtn.addEventListener('click', renderPageHandler.showSection);
-        contactBtn.addEventListener('click', renderPageHandler.showSection);
+    const _attachHeaderEventListeners = function() {
+        btnList.forEach((btn) => {
+            btn.addEventListener('click', _clearActiveSection);
+            btn.addEventListener('click', renderPageHandler.showSection);
+        })
+    }
+
+    const _clearActiveSection = function() {
+        btnList.forEach((btn) => {
+            btn.classList = "";
+        })
     }
 
     const _generateSocials = function() {
         const socialsWrapper = document.createElement('div');
+        socialsWrapper.id = 'socials-wrapper';
 
         const instagramLink = document.createElement('a');
         instagramLink.href = 'https://www.instagram.com/O.MA.KASE_NYC/';
@@ -51,6 +67,7 @@ const header = (function() {
         const instagramIcon = document.createElement('img');
         instagramIcon.src = InstagramLogo;
         instagramIcon.alt = 'Instagram Icon';
+        instagramIcon.id = 'instagram-icon';
         instagramLink.appendChild(instagramIcon);
         socialsWrapper.appendChild(instagramLink);
 
@@ -61,20 +78,31 @@ const header = (function() {
         const facebookIcon = document.createElement('img');
         facebookIcon.src = FacebookLogo;
         facebookIcon.alt = 'Facebook Icon';
+        facebookIcon.id = 'facebook-icon';
         facebookLink.appendChild(facebookIcon);
         socialsWrapper.appendChild(facebookLink);
 
         return socialsWrapper;
     }
 
-    const generateHeader = function() {
-        const header = document.createElement('header');
+    const _generateLogo = function() {
+        const logoWrapper = document.createElement('div');
+        logoWrapper.id = 'logo-wrapper';
 
         const logo = document.createElement('img');
         logo.src = OmakaseLogo;
         logo.alt = 'O - Ma - Kase logo';
+        logo.id = 'omakase-logo';
+        logoWrapper.appendChild(logo);
         
-        header.appendChild(logo);
+        return logoWrapper;
+    }
+
+    const generateHeader = function() {
+        const header = document.createElement('header');
+        header.id = 'header';
+        
+        header.appendChild(_generateLogo());
         header.appendChild(_generateNav());
         header.appendChild(_generateSocials());
 
@@ -89,8 +117,8 @@ const landing = (function() {
         const aboutWrapper = document.createElement('div');
         aboutWrapper.id = 'about-wrapper';
 
-        const aboutHeader = document.createElement('h3');
-        aboutHeader.innerText = 'About';
+        const aboutHeader = document.createElement('h2');
+        aboutHeader.innerText = 'ABOUT';
     
         const about1 = document.createElement('p');
         about1.innerText = 'Omakase is a Japanese phrase which translates to "I leave it up to you." It is a term typically used in Japanese restaurants where the details of the meal are left up to the chef, who chooses seasonal specialties based on the highest quality ingredients available at the time.';
@@ -113,8 +141,8 @@ const menu = (function() {
         const menuWrapper = document.createElement('div');
         menuWrapper.id = 'menu-wrapper';
         
-        const menuHeader = document.createElement('h3');
-        menuHeader.innerText = 'Menu';
+        const menuHeader = document.createElement('h2');
+        menuHeader.innerText = 'MENU';
         menuWrapper.appendChild(menuHeader);
 
         const menuList = document.createElement('ul');
@@ -165,7 +193,7 @@ const contact = (function() {
 
         const locationTitleWrapper = document.createElement('li');
         const locationTitle = document.createElement('h4');
-        locationTitle.innerText = 'Address:';
+        locationTitle.innerText = 'ADDRESS:';
         locationTitleWrapper.appendChild(locationTitle);
         locationCard.appendChild(locationTitleWrapper);
 
@@ -202,7 +230,7 @@ const contact = (function() {
 
         const contactMeTitleWrapper = document.createElement('li');
         const contactMeTitle = document.createElement('h4');
-        contactMeTitle.innerText = 'For business inquiries:';
+        contactMeTitle.innerText = 'FOR BUSINESS INQUIRIES:';
         contactMeTitleWrapper.appendChild(contactMeTitle);
         contactMeCard.appendChild(contactMeTitleWrapper);
 
@@ -240,8 +268,8 @@ const contact = (function() {
         const contactWrapper = document.createElement('div');
         contactWrapper.id = 'contact-wrapper';
         
-        const contactHeader = document.createElement('h3');
-        contactHeader.innerText = 'Contact Us';
+        const contactHeader = document.createElement('h2');
+        contactHeader.innerText = 'CONTACT US';
         contactWrapper.appendChild(contactHeader);
 
         contactWrapper.appendChild(_renderLocationInfo());
@@ -261,31 +289,32 @@ const renderPageHandler = (function() {
     }
     
     const _renderAbout = function() {
-        content.appendChild(landing.generateAbout());
-        const aboutWrapper = document.getElementById('about-wrapper');
-        wrapperList.push(aboutWrapper);
+        const aboutElement = landing.generateAbout();
+        content.appendChild(aboutElement);
+        wrapperList.push(aboutElement);
     }
     
     const _renderMenu = function() {
-        content.appendChild(menu.generateMenu());
-        const menuWrapper = document.getElementById('menu-wrapper');
-        wrapperList.push(menuWrapper);
+        const menuElement = menu.generateMenu();
+        content.appendChild(menuElement);
+        wrapperList.push(menuElement);
     }
 
     const _renderContactUs = function() {
-        content.appendChild(contact.generateContactUs());
-        const contactWrapper = document.getElementById('contact-wrapper');
-        wrapperList.push(contactWrapper);
+        const contactUsElement = contact.generateContactUs();
+        content.appendChild(contactUsElement);
+        wrapperList.push(contactUsElement);
     }
 
     const _clearContent = function(event) {
         wrapperList.forEach((wrapper) => {
             wrapper.style.display = 'none';
+            wrapper.classList = '';
         })
-        console.log(event);
     }
 
     const showSection = function(e) {
+        e.target.classList = 'active-section';
         _clearContent();
         // targetSection obtains the name of the desired section by
         // slicing the name of the target and using index of 0
