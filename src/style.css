@@ -11,7 +11,8 @@
 * {
     padding: 0;
     margin: 0;
-    border: 1px solid blue;
+    /* border: 1px solid blue; */
+    transition: 0.2s all;
 }
 
 ul {
@@ -23,10 +24,12 @@ button {
     border: none;
     
     font-family: 'Ysabeau Office', sans-serif;
+    font-size: 1rem;
 }
 
 button.active-section {
     font-weight: bolder;
+    font-size: 1.3rem;
 }
 
 body {
@@ -37,13 +40,12 @@ body {
 
     background-color: rgba(248, 237, 211, 0.418);
     font-family: 'Ysabeau Office', sans-serif;
+    font-size: 1rem;
 }
 
 header {
     display: flex;
-    flex-flow: column;
-
-    flex-wrap: wrap;
+    flex-flow: column wrap;
 }
 
 #logo-wrapper {
@@ -61,13 +63,20 @@ header {
     flex-flow: column;
     justify-content: center;
     padding: 0.25rem;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
 }
 
-#socials-wrapper{  
+#socials-wrapper {  
     display: flex;
     justify-content: center;
     padding: 0.25rem;
     gap: 1rem;
+    border-bottom: 1px solid black;
+}
+
+#socials-wrapper a {
+    height: 1.5rem;
 }
 
 #facebook-icon, #instagram-icon {
@@ -76,4 +85,60 @@ header {
 
 #about-wrapper, #menu-wrapper, #contact-wrapper {
     padding: 0.5rem;
+}
+
+#about-wrapper p {
+    margin-top: 1rem;
+}
+
+#menu-wrapper li {
+    margin-top: 1rem;
+}
+
+#contact-wrapper #location-card, 
+#contact-wrapper #contact-me-card {
+    margin-top: 1rem;
+}
+
+#contact-wrapper li {
+    margin-left: 0.5rem;
+}
+
+#contact-wrapper li {
+    /* margin-bottom: 0.3rem; */
+}
+
+#contact-wrapper li:first-child {
+    margin-left: 0;
+}
+
+#contact-wrapper h4 {
+    margin-bottom: 0.25rem;
+}
+
+@media only screen and (min-width: 1000px) {
+    header {
+        flex-direction: row;
+        border-bottom: 1px solid black;
+    }
+
+    #logo-wrapper {
+        text-align: left;
+        padding: 0.5rem;
+    }
+    
+    #nav {
+        flex-direction: row;
+        flex: 1;
+        gap: 2rem;
+        border: none;
+    }
+
+    #socials-wrapper {
+        align-items: center;
+        justify-content: right;
+        padding: 0.5rem;
+        width: 18rem;
+        border: none;
+    }
 }
